@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CityInsight weather dashboard powered by Flask and Open-Meteo">
+  <title>CityInsight · Live Weather Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <nav class="nav">
+      <a class="brand" href="/" aria-label="CityInsight home"><span class="brand-mark">C</span><span>CityInsight</span></a>
+      <span class="api-pill"><span class="pulse"></span> Open-Meteo connected</span>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FLASK · REST API · SQLITE</p>
+        <h1>Weather intelligence,<br><span>without the noise.</span></h1>
+        <p class="intro">Search a city once. CityInsight saves its location, fetches live weather, and intelligently serves fresh results from the database.</p>
+      </div>
+      <div class="architecture" aria-label="Application data flow">
+        <span>Browser</span><b>→</b><span>Flask API</span><b>→</b><span>SQLite + Open-Meteo</span>
+      </div>
+    </section>
+
+    <section class="search-card">
+      <form id="city-form">
+        <label for="city-input">Add a city to your dashboard</label>
+        <div class="search-row">
+          <div class="input-wrap"><span aria-hidden="true">⌕</span><input id="city-input" maxlength="120" autocomplete="off" placeholder="Try Hyderabad, London, Tokyo…" required></div>
+          <button id="add-button" type="submit">Add city <span>→</span></button>
+        </div>
+      </form>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="dashboard-head">
+      <div><p class="eyebrow">YOUR LOCATIONS</p><h2>Weather dashboard</h2></div>
+      <button class="text-button" id="refresh-all">↻ Refresh all</button>
+    </section>
+    <section id="city-grid" class="city-grid" aria-live="polite"></section>
+    <section id="empty-state" class="empty-state" hidden>
+      <div class="empty-icon">⌖</div><h3>No cities yet</h3><p>Add your first city above to see its live weather.</p>
+    </section>
+
+    <footer><span>Built with Flask, SQLAlchemy & Open-Meteo</span><span>Smart 15-minute database caching</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
